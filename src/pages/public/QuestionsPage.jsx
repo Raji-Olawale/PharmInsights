@@ -6,12 +6,10 @@ import PageLoader from '../../components/shared/PageLoader'
 import { categories, categoryPath } from '../../data/questionnaires'
 import { useDrafts } from '../../hooks/useDrafts'
 import { useQuestionnaire } from '../../hooks/useResearch'
-import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { isSupabaseConfigured } from '../../lib/supabase'
 import { getAccentStyle } from '../../utils/categoryStyles'
 
 export default function QuestionsPage() {
-  useScrollToTop()
   const { category: slug } = useParams()
   const metadata = categories[slug]
   const { data: questionnaire, isLoading, error } = useQuestionnaire(slug)

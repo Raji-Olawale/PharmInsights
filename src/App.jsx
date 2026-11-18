@@ -7,6 +7,7 @@ import ProtectedAdmin from './routes/ProtectedAdmin'
 import PublicLayout from './components/layout/PublicLayout'
 import AdminLayout from './components/layout/AdminLayout'
 import PageLoader from './components/shared/PageLoader'
+import RouteScrollToTop from './components/layout/RouteScrollToTop'
 
 const HomePage = lazy(() => import('./pages/public/HomePage'))
 const CategoryPage = lazy(() => import('./pages/public/CategoryPage'))
@@ -30,6 +31,7 @@ function App() {
       <AuthProvider>
         <DraftProvider>
         <BrowserRouter>
+          <RouteScrollToTop />
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route element={<PublicLayout />}>

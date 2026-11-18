@@ -1,11 +1,9 @@
 import { AlertCircle, ArrowRight, Check, ClipboardCheck, LockKeyhole } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import ConfigurationError from '../../components/shared/ConfigurationError'
-import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { isSupabaseConfigured } from '../../lib/supabase'
 
 export default function SuccessPage() {
-  useScrollToTop()
   const { state } = useLocation()
   if (!isSupabaseConfigured) return <ConfigurationError />
   if (!state?.reference) {

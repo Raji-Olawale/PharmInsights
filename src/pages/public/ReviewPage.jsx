@@ -6,12 +6,10 @@ import ConfigurationError from '../../components/shared/ConfigurationError'
 import { categories, categoryPath } from '../../data/questionnaires'
 import { useDrafts } from '../../hooks/useDrafts'
 import { useQuestionnaire, useSubmitResponse } from '../../hooks/useResearch'
-import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { isSupabaseConfigured } from '../../lib/supabase'
 import { getAccentStyle } from '../../utils/categoryStyles'
 
 export default function ReviewPage() {
-  useScrollToTop()
   const { category: slug } = useParams()
   const metadata = categories[slug]
   const { data: questionnaire, isLoading, error } = useQuestionnaire(slug)

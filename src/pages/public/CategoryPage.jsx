@@ -1,7 +1,9 @@
-import { ArrowLeft, ArrowRight, LoaderCircle } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { categories, categoryPath } from '../../data/questionnaires'
 import ConfigurationError from '../../components/shared/ConfigurationError'
+import PageLoader from '../../components/shared/PageLoader'
 import { useCategories } from '../../hooks/useResearch'
 import { isSupabaseConfigured } from '../../lib/supabase'
 import { getAccentStyle } from '../../utils/categoryStyles'
@@ -9,9 +11,10 @@ import { getAccentStyle } from '../../utils/categoryStyles'
 export default function CategoryPage() {
   const { data = [], isLoading, error } = useCategories()
   const navigate = useNavigate()
+  const [selectedCategory, setSelectedCategory] = useState('')
 
   if (!isSupabaseConfigured) return <ConfigurationError />
-  if (isLoading) return <div className="question-loading [min-height:100vh] [display:flex] [flex-direction:column] [justify-content:center] [align-items:center] [gap:13px] [color:#6f8092] [background:#f6f9fc] [font-size:12px]"><LoaderCircle className="spin animate-spin" />Loading stakeholder categories…</div>
+  if (isLoading) return <PageLoader label="Loading stakeholder categories…" />
   if (error) return <ConfigurationError message={error.message} />
 
   return (
@@ -26,16 +29,33 @@ export default function CategoryPage() {
             if (!metadata) return null
             const Icon = metadata.icon
             return (
-              <button key={category.id} type="button" style={getAccentStyle(metadata.accent)} className={[(`selection-card accent-${metadata.accent}`), "[width:100%] [min-height:86px] [padding:14px_15px] [border:1px_solid_#e0e7ed] [border-radius:10px] [display:flex] [align-items:center] [gap:14px] [color:var(--text)] [text-align:left] [background:#fff] [transition:border_.18s,_box-shadow_.18s,_background_.18s] hover:[border-color:#bacbd8] max-[620px]:[min-height:82px] max-[620px]:[padding:11px] max-[620px]:[gap:11px]"].filter(Boolean).join(' ')} onClick={() => navigate(categoryPath(category.slug))}>
+              <button
+                key={category.id}
+                type="button"
+                aria-pressed={selectedCategory === category.slug}
+                style={getAccentStyle(metadata.accent)}
+                className={`selection-card accent-${metadata.accent} flex min-h-[86px] w-full items-center gap-[14px] rounded-[10px] border bg-white px-[15px] py-[14px] text-left text-[var(--text)] transition duration-200 hover:border-[#bacbd8] max-[620px]:min-h-[82px] max-[620px]:gap-[11px] max-[620px]:p-[11px] ${selectedCategory === category.slug ? 'border-[var(--accent)] bg-[var(--accent-soft)] shadow-[0_0_0_2px_var(--accent-soft),0_8px_20px_rgba(18,43,70,.08)]' : 'border-[#e0e7ed]'} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]`}
+                onClick={() => setSelectedCategory(category.slug)}
+              >
                 <span className="selection-icon [width:43px] [height:43px] [flex:0_0_auto] [border-radius:11px] [display:grid] [place-items:center] [color:var(--accent)] [background:var(--accent-soft)] max-[620px]:[width:38px] max-[620px]:[height:38px]"><Icon size={22} /></span>
                 <span className="selection-copy [display:grid] [gap:5px]"><strong className="[color:#203954] [font-size:12px]">{category.name}</strong><small className="[color:#78889a] [font-size:10px] [line-height:1.5] max-[620px]:[font-size:9px]">{category.description}</small></span>
-                <span className="selection-check [width:20px] [height:20px] [flex:0_0_auto] [margin-left:auto] [border:1px_solid_#dbe3eb] [border-radius:50%] [display:grid] [place-items:center] [color:#fff]"><ArrowRight size={16} /></span>
+                <span className={`ml-auto grid size-6 shrink-0 place-items-center rounded-full transition ${selectedCategory === category.slug ? 'bg-[var(--accent)] text-white' : 'border border-[#dbe3eb] text-transparent'}`}>{selectedCategory === category.slug ? <Check size={15} /> : <ArrowRight size={15} className="text-[#8293a4]" />}</span>
               </button>
             )
           })}
           {data.length === 0 && <div className="admin-error [padding:34px] [border:1px_solid_#f0d7d1] [border-radius:9px] [background:#fff]"><h2 className="[margin:0_0_8px] [color:#934c43] [font-size:14px]">No categories are configured</h2><p className="[margin:0_0_17px] [color:#8c7671] [font-size:10px]">The database returned no stakeholder categories.</p></div>}
         </div>
-        <div className="selection-actions [margin-top:20px] [display:flex] [justify-content:space-between] [align-items:center] max-[620px]:[align-items:flex-start] max-[620px]:[flex-direction:column] max-[620px]:[gap:15px]"><span className="selection-security [display:flex] [align-items:center] [gap:7px] [color:#77889b] [font-size:10px]">No account required</span></div>
+        <div className="selection-actions [margin-top:20px] [display:flex] [justify-content:space-between] [align-items:center] max-[620px]:[align-items:flex-start] max-[620px]:[flex-direction:column] max-[620px]:[gap:15px]">
+          <span className="selection-security [display:flex] [align-items:center] [gap:7px] [color:#77889b] [font-size:10px]">No account required</span>
+          <button
+            type="button"
+            disabled={!selectedCategory}
+            onClick={() => navigate(categoryPath(selectedCategory))}
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-[#079b59] px-4 text-xs font-bold text-white shadow-sm transition hover:bg-[#07844e] disabled:cursor-not-allowed disabled:bg-[#a8c9b8] disabled:shadow-none"
+          >
+            Continue <ArrowRight size={16} />
+          </button>
+        </div>
       </div>
       <div className="onboarding-bottom [max-width:850px] [width:100%] [margin:0_auto] [padding-top:13px] [border-top:1px_solid_#e4eaf0] [display:flex] [justify-content:space-between] [color:#94a1b0] [font-size:9px] max-[620px]:[gap:10px] max-[620px]:[font-size:7px]"><span className="first:[font-weight:700] first:[letter-spacing:.9px]">PHARMAINSIGHT</span><span className="first:[font-weight:700] first:[letter-spacing:.9px]">Your contribution is confidential and secure.</span></div>
     </div>

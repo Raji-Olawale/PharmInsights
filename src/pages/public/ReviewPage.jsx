@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { AlertCircle, ArrowLeft, ArrowRight, Check, Edit3, LoaderCircle, LockKeyhole } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import Brand from '../../components/layout/Brand'
+// import Brand from '../../components/layout/Brand'
 import ConfigurationError from '../../components/shared/ConfigurationError'
 import { categories, categoryPath } from '../../data/questionnaires'
 import { useDrafts } from '../../hooks/useDrafts'
 import { useQuestionnaire, useSubmitResponse } from '../../hooks/useResearch'
+import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { isSupabaseConfigured } from '../../lib/supabase'
 import { getAccentStyle } from '../../utils/categoryStyles'
 
 export default function ReviewPage() {
+  useScrollToTop()
   const { category: slug } = useParams()
   const metadata = categories[slug]
   const { data: questionnaire, isLoading, error } = useQuestionnaire(slug)
@@ -58,7 +60,7 @@ export default function ReviewPage() {
 
   return (
     <div className="questionnaire-page review-page [min-height:100vh] [color:var(--text)] [background:#f5f8fc]">
-      <header className="questionnaire-header [height:66px] [padding:0_max(25px,_calc((100%_-_1050px)/2))] [border-bottom:1px_solid_#e6ecf1] [display:flex] [align-items:center] [justify-content:space-between] [background:#fff] max-[620px]:[height:58px] max-[620px]:[padding:0_16px]"><Brand size="questionnaire" /><div style={getAccentStyle(metadata.accent)} className={[(`question-category accent-${metadata.accent}`), "[display:inline-flex] [align-items:center] [gap:7px] [color:#4a6078] [font-size:10px] [font-weight:600] max-[620px]:[font-size:8px]"].filter(Boolean).join(' ')}><span className="[width:7px] [height:7px] [border-radius:50%] [background:var(--accent)]" />{questionnaire.category.name}</div><div className="question-safe [display:inline-flex] [align-items:center] [gap:6px] [color:#74869a] [font-size:9px] max-[620px]:[font-size:0]"><LockKeyhole size={15} />Private & secure</div></header>
+      
       <main className="review-main [width:min(100%_-_40px,_800px)] [margin:auto] [padding:30px_0_48px] max-[620px]:[width:calc(100%_-_32px)] max-[620px]:[padding:22px_0_30px]">
         <div className="question-step-label [margin-bottom:29px] [display:flex] [align-items:center] [justify-content:space-between] [color:#95a1ae] [font-size:8px] [font-weight:700] [letter-spacing:1px] max-[620px]:[margin-bottom:23px]"><Link to={categoryPath(slug, 'questions')} className="[display:inline-flex] [align-items:center] [gap:6px] [color:#718198] [font-size:10px] [font-weight:600] [letter-spacing:0] hover:[color:var(--navy)]"><ArrowLeft size={15} />Back to questionnaire</Link><span>FINAL STEP</span></div>
         <div className="review-heading [margin:0_0_24px] [display:flex] [align-items:center] [gap:14px] max-[620px]:[align-items:flex-start] max-[620px]:[gap:10px]"><div className="review-check [width:42px] [height:42px] [border-radius:12px] [display:grid] [place-items:center] [color:var(--green)] [background:#eaf7f0] max-[620px]:[width:36px] max-[620px]:[height:36px] max-[620px]:[flex:0_0_auto]"><Check size={20} /></div><div><h1 className="[margin:0_0_4px] [color:var(--navy)] [font-family:Manrope,_sans-serif] [font-size:23px] [letter-spacing:-.6px] max-[620px]:[font-size:20px]">Review your responses</h1><p className="[margin:0] [color:#8290a1] [font-size:10px] max-[620px]:[line-height:1.6]">Take a moment to make sure everything looks right before submitting.</p></div></div>

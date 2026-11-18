@@ -6,6 +6,7 @@ import { DraftProvider } from './context/DraftContext'
 import ProtectedAdmin from './routes/ProtectedAdmin'
 import PublicLayout from './components/layout/PublicLayout'
 import AdminLayout from './components/layout/AdminLayout'
+import PageLoader from './components/shared/PageLoader'
 
 const HomePage = lazy(() => import('./pages/public/HomePage'))
 const CategoryPage = lazy(() => import('./pages/public/CategoryPage'))
@@ -29,7 +30,7 @@ function App() {
       <AuthProvider>
         <DraftProvider>
         <BrowserRouter>
-          <Suspense fallback={<div className="full-loading">Loading PharmaInsight…</div>}>
+          <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route element={<PublicLayout />}>
                 <Route path="/" element={<HomePage />} />

@@ -1,10 +1,11 @@
 import { AlertCircle, ArrowRight, Check, ClipboardCheck, LockKeyhole } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
-import Brand from '../../components/layout/Brand'
 import ConfigurationError from '../../components/shared/ConfigurationError'
+import { useScrollToTop } from '../../hooks/useScrollToTop'
 import { isSupabaseConfigured } from '../../lib/supabase'
 
 export default function SuccessPage() {
+  useScrollToTop()
   const { state } = useLocation()
   if (!isSupabaseConfigured) return <ConfigurationError />
   if (!state?.reference) {
@@ -12,7 +13,7 @@ export default function SuccessPage() {
   }
   return (
     <div className="success-page [min-height:100vh] [background:#f5f8fc]">
-      <header className="form-topbar [height:66px] [padding:0_max(28px,_calc((100%_-_1160px)/2))] [border-bottom:1px_solid_#e6ecf1] [display:flex] [justify-content:space-between] [align-items:center] [background:#fff] max-[620px]:[height:59px] max-[620px]:[padding:0_18px]"><Brand size="small" /><div className="form-secure [display:inline-flex] [align-items:center] [gap:7px] [color:#6d8093] [font-size:10px] [font-weight:600]"><LockKeyhole size={16} />Secure & confidential</div></header>
+     
       <main className="success-content [width:min(100%_-_38px,_510px)] [min-height:calc(100vh_-_116px)] [margin:auto] [padding:44px_0_38px] [display:flex] [flex-direction:column] [align-items:center] [justify-content:center] [text-align:center] max-[620px]:[min-height:calc(100vh_-_106px)] max-[620px]:[padding-top:30px]">
         <div className="success-art [width:124px] [height:124px] [position:relative] [margin-bottom:23px] [display:grid] [place-items:center]"><div className="success-ring ring-one [position:absolute] [border:1px_solid_rgba(7,155,89,.18)] [border-radius:50%] [inset:5px]" /><div className="success-ring ring-two [position:absolute] [border:1px_solid_rgba(7,155,89,.18)] [border-radius:50%] [inset:-5px] [border-color:rgba(7,155,89,.1)]" /><span className="[width:66px] [height:66px] [border:7px_solid_#d8f1e4] [border-radius:50%] [display:grid] [place-items:center] [color:#fff] [background:var(--green)] [box-shadow:0_8px_19px_rgba(7,155,89,.2)]"><Check size={38} strokeWidth={2.2} /></span><i className="success-spark spark-one [width:7px] [height:7px] [position:absolute] [border-radius:2px] [background:#69c999] [transform:rotate(45deg)] [left:4px] [top:29px]" /><i className="success-spark spark-two [width:7px] [height:7px] [position:absolute] [border-radius:2px] [background:#69c999] [transform:rotate(45deg)] [right:5px] [top:27px] [width:5px] [height:5px]" /><i className="success-spark spark-three [width:7px] [height:7px] [position:absolute] [border-radius:2px] [background:#69c999] [transform:rotate(45deg)] [right:19px] [bottom:4px] [width:5px] [height:5px]" /></div>
         <div className="eyebrow [display:inline-flex] [align-items:center] [gap:9px] [color:#708197] [font-size:10px] [font-weight:700] [letter-spacing:1.2px]"><span className="eyebrow-dot [width:7px] [height:7px] [display:inline-block] [border-radius:50%] [background:var(--green)] [box-shadow:0_0_0_4px_rgba(7,155,89,.1)]" />RESPONSE RECEIVED</div>

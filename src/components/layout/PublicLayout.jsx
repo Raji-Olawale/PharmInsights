@@ -27,10 +27,7 @@ export default function PublicLayout() {
             <Brand light />
             <p className="[max-width:330px] [margin:13px_0_0] [color:#9fb0c2] [font-size:12px] [line-height:1.75]">Research for a stronger, more connected pharmaceutical supply chain in Uganda.</p>
           </div>
-          <div className="footer-links [display:flex] [justify-content:center] [gap:25px] [font-size:12px] max-[620px]:[justify-content:flex-start]">
-            <a href="mailto:research@pharmainsight.ug" className="hover:[color:#fff]">Contact Us</a>
-            <a href="mailto:research@pharmainsight.ug?subject=Privacy%20enquiry" className="hover:[color:#fff]">Privacy Policy</a>
-          </div>
+          
           <div className="copyright [color:#8297ac] [font-size:11px] [text-align:right] max-[800px]:[grid-column:1/-1] max-[800px]:[text-align:left] max-[620px]:[grid-column:auto]">© {new Date().getFullYear()} PharmaInsight. All rights reserved.</div>
         </div>
       </footer>

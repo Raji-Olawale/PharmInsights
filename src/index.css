@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: Manrope, sans-serif;
+  --color-navy: #0b2e59;
+  --color-blue: #1769aa;
+  --color-green: #079b59;
+  --color-green-dark: #07844e;
+  --color-text: #152b45;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-paper: #fff;
+  --color-page: #f5f8fc;
+  --color-soft-green: #eaf7f0;
+  --shadow-card: 0 12px 35px rgba(17, 43, 74, .055);
+}
+
+:root {
+  --navy: var(--color-navy);
+  --blue: var(--color-blue);
+  --green: var(--color-green);
+  --green-dark: var(--color-green-dark);
+  --text: var(--color-text);
+  --muted: var(--color-muted);
+  --border: var(--color-border);
+  --paper: var(--color-paper);
+  --page: var(--color-page);
+  --soft-green: var(--color-soft-green);
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-page);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+  }
+
+  button,
+  a,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: .62;
+  }
+
+  ::selection {
+    color: #fff;
+    background: #0a9960;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgba(23, 105, 170, .45);
+    outline-offset: 3px;
+  }
+}

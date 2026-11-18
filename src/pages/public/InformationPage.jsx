@@ -42,10 +42,10 @@ export default function InformationPage() {
   const category = categoryRows.find((item) => item.slug === slug)
 
   if (!isSupabaseConfigured) return <ConfigurationError />
-  if (!metadata) return <div className="question-loading [min-height:100vh] [display:flex] [flex-direction:column] [justify-content:center] [align-items:center] [gap:13px] [color:#6f8092] [background:#f6f9fc] [font-size:12px]"><p className="[max-width:460px] [margin:0] [text-align:center] [line-height:1.7]">This stakeholder category is not supported.</p><Link to="/select-category">Choose a category</Link></div>
+  if (!metadata) return <div className="question-loading min-h-screen flex flex-col justify-center items-center gap-[13px] text-[#6f8092] bg-[#f6f9fc] text-xs"><p className="max-w-[460px] m-0 text-center leading-[1.7]">This stakeholder category is not supported.</p><Link to="/select-category">Choose a category</Link></div>
   if (categoriesLoading) return <PageLoader label="Loading stakeholder category…" />
   if (categoriesError) return <ConfigurationError message={categoriesError.message} />
-  if (!category) return <div className="question-loading [min-height:100vh] [display:flex] [flex-direction:column] [justify-content:center] [align-items:center] [gap:13px] [color:#6f8092] [background:#f6f9fc] [font-size:12px]"><p className="[max-width:460px] [margin:0] [text-align:center] [line-height:1.7]">This stakeholder category is not available in the research database.</p><Link to="/select-category">Choose another category</Link></div>
+  if (!category) return <div className="question-loading min-h-screen flex flex-col justify-center items-center gap-[13px] text-[#6f8092] bg-[#f6f9fc] text-xs"><p className="max-w-[460px] m-0 text-center leading-[1.7]">This stakeholder category is not available in the research database.</p><Link to="/select-category">Choose another category</Link></div>
 
   const beginAnonymous = () => {
     startDraft(slug, true, {})
@@ -69,14 +69,14 @@ export default function InformationPage() {
   }
 
   return (
-    <div className="form-page [min-height:100vh] [background:#f5f8fc]">
-      <div className="form-layout [width:min(100%_-_48px,_1060px)] [min-height:calc(100vh_-_66px)] [margin:0_auto] [padding:37px_0_52px] [display:grid] [align-items:start] [gap:65px] max-[800px]:[gap:30px] max-[620px]:[width:min(100%_-_36px,_520px)] max-[620px]:[padding:20px_0_34px] max-[620px]:[display:flex] max-[620px]:[flex-direction:column] max-[620px]:[gap:21px]">
+    <div className="form-page min-h-screen bg-page">
+      <div className="form-layout w-[min(100%_-_48px,_1060px)] min-h-[calc(100vh_-_66px)] my-0 mx-auto pt-[37px] px-0 pb-[52px] grid items-start gap-[65px] max-tablet:gap-[30px] max-mobile:w-[min(100%_-_36px,_520px)] max-mobile:pt-5 max-mobile:px-0 max-mobile:pb-[34px] max-mobile:flex max-mobile:flex-col max-mobile:gap-[21px]">
         
-        <section className="form-main [padding-top:8px] max-[620px]:[width:100%] max-[620px]:[padding:0]">
-          <div className="form-progress-meta [display:flex] [justify-content:space-between] [color:#8a98a9] [font-size:9px]"><span className="first:[color:var(--green)] first:[font-size:8px] first:[font-weight:700] first:[letter-spacing:.7px]">STEP 02 OF 03</span><span className="first:[color:var(--green)] first:[font-size:8px] first:[font-weight:700] first:[letter-spacing:.7px]">{shareDetails ? 'Business information' : 'Choose how to participate'}</span></div><div className="form-progress [height:3px] [margin-top:10px] [overflow:hidden] [border-radius:10px] [background:#e6edf2]"><span style={{ width: '33%' }} className="[height:100%] [display:block] [border-radius:inherit] [background:var(--green)]" /></div>
-          <header className="form-heading [margin:25px_0_22px] [position:relative] [padding-left:46px] max-[620px]:[margin:19px_0]"><span className="form-icon [width:34px] [height:34px] [position:absolute] [left:0] [top:0] [border-radius:10px] [display:grid] [place-items:center] [color:var(--green)] [background:#e8f7ef]">{shareDetails ? <UserRound size={20} /> : <ShieldCheck size={20} />}</span>
-          <h2 className="[margin:0_0_4px] [color:var(--navy)] [font-family:Manrope,_sans-serif] [font-size:19px] [letter-spacing:-.45px]">{shareDetails ? 'Tell us about your business' : 'How would you like to respond?'}</h2>
-          {/* <p className="[margin:0] [color:#8794a4] [font-size:9px]">{shareDetails ? 'Your information is only shared with your consent.' : 'You can continue without sharing identifying details.'}</p> */}
+        <section className="form-main pt-2 max-mobile:w-full max-mobile:p-0">
+          <div className="form-progress-meta flex justify-between text-[#8a98a9] text-[9px]"><span className="first:text-green first:text-[8px] first:font-bold first:tracking-[.7px]">STEP 02 OF 03</span><span className="first:text-green first:text-[8px] first:font-bold first:tracking-[.7px]">{shareDetails ? 'Business information' : 'Choose how to participate'}</span></div><div className="form-progress h-0.75 mt-2.5 overflow-hidden rounded-[10px] bg-[#e6edf2]"><span style={{ width: '33%' }} className="h-full block rounded-[inherit] bg-green" /></div>
+          <header className="form-heading mt-[25px] mx-0 mb-[22px] relative pl-[46px] max-mobile:my-[19px] max-mobile:mx-0"><span className="form-icon w-[34px] h-[34px] absolute left-0 top-0 rounded-[10px] grid place-items-center text-green bg-[#e8f7ef]">{shareDetails ? <UserRound size={20} /> : <ShieldCheck size={20} />}</span>
+          <h2 className="mt-0 mx-0 mb-1 text-navy font-display text-[19px] tracking-[-.45px]">{shareDetails ? 'Tell us about your business' : 'How would you like to respond?'}</h2>
+          {/* <p className="m-0 text-[#8794a4] text-[9px]">{shareDetails ? 'Your information is only shared with your consent.' : 'You can continue without sharing identifying details.'}</p> */}
           </header>
           {!shareDetails ? <div className="grid grid-cols-1 gap-3 sm:grid-cols-2" role="group" aria-label="Choose how to participate">
             <button
@@ -104,7 +104,7 @@ export default function InformationPage() {
           </div> : <div>
           <button type="button" className="mb-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#60738a] transition hover:text-[#0b2e59]" onClick={() => setShareDetails(false)}><ArrowLeft size={15} />Back to participation options</button>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div className="form-grid [display:grid] [grid-template-columns:1fr_1fr] [gap:15px_13px] max-[620px]:[gap:13px_10px]">
+            <div className="form-grid grid grid-cols-2 gap-y-[15px] gap-x-[13px] max-mobile:gap-y-[13px] gap-x-2.5">
               <Field label="Business / organisation name" name="businessName" placeholder="e.g. Acacia Healthcare Ltd" register={register} error={errors.businessName} required />
               <Field label="Contact person’s full name" name="contactName" placeholder="Full name" register={register} error={errors.contactName} required />
               <Field label="Business email (optional)" name="email" placeholder="name@business.com" type="email" register={register} error={errors.email} />
@@ -112,8 +112,8 @@ export default function InformationPage() {
               <Field label="Country" name="country" placeholder="e.g. Uganda" register={register} error={errors.country} required />
               <Field label="City / location" name="city" placeholder="e.g. Kampala" register={register} error={errors.city} required />
             </div>
-            {submitError && <div className="form-error [margin-top:13px] [padding:10px_12px] [border:1px_solid_#f1c5bf] [border-radius:7px] [color:#a94438] [background:#fff5f4] [font-size:10px] [margin-top:14px]" role="alert">{submitError}</div>}
-            <div className="form-submit-row [margin-top:24px] [display:flex] [justify-content:space-between] [align-items:center] [gap:12px] max-[620px]:[align-items:stretch] max-[620px]:[flex-direction:column-reverse] max-[620px]:[gap:12px]"><span className="[display:inline-flex] [align-items:center] [gap:6px] [color:#8190a0] [font-size:9px]"><ShieldCheck size={15} />Only submitted with your consent</span><button className="button button-green [min-height:42px] [padding:0_16px] [border:1px_solid_transparent] [border-radius:8px] [display:inline-flex] [align-items:center] [justify-content:center] [gap:9px] [font-size:12px] [font-weight:700] [transition:background_.18s,_border-color_.18s,_box-shadow_.18s,_transform_.18s] enabled:hover:[transform:translateY(-1px)] [color:#fff] [background:var(--green)] [box-shadow:0_5px_13px_rgba(7,155,89,.13)] enabled:hover:[background:var(--green-dark)] enabled:hover:[box-shadow:0_8px_18px_rgba(7,155,89,.2)] max-[620px]:[width:100%]" disabled={isSubmitting}>{isSubmitting ? <><LoaderCircle className="spin animate-spin" size={17} />Starting…</> : <>Continue to questions <ArrowRight size={17} /></>}</button></div>
+            {submitError && <div className="form-error mt-[13px] py-2.5 px-3 border border-[#f1c5bf] rounded-[7px] text-[#a94438] bg-[#fff5f4] text-[10px] mt-3.5" role="alert">{submitError}</div>}
+            <div className="form-submit-row mt-6 flex justify-between items-center gap-3 max-mobile:items-stretch max-mobile:flex-col-reverse max-mobile:gap-3"><span className="inline-flex items-center gap-1.5 text-[#8190a0] text-[9px]"><ShieldCheck size={15} />Only submitted with your consent</span><button className="button button-green min-h-[42px] py-0 px-4 border border-transparent rounded-lg inline-flex items-center justify-center gap-[9px] text-xs font-bold transition-all duration-200 enabled:hover:-translate-y-px text-white bg-green shadow-[0_5px_13px_rgba(7,155,89,.13)] enabled:hover:bg-green-dark enabled:hover:shadow-[0_8px_18px_rgba(7,155,89,.2)] max-mobile:w-full" disabled={isSubmitting}>{isSubmitting ? <><LoaderCircle className="spin animate-spin" size={17} />Starting…</> : <>Continue to questions <ArrowRight size={17} /></>}</button></div>
           </form>
           </div>}
         </section>
@@ -123,5 +123,5 @@ export default function InformationPage() {
 }
 
 function Field({ label, name, placeholder, type = 'text', register, error, required }) {
-  return <label className="form-field [min-width:0] [display:flex] [flex-direction:column] [gap:6px] [color:#344a62] [font-size:10px] [font-weight:600] max-[620px]:[font-size:9px]"><span>{label} {required && <b className="[color:#e2725e]">*</b>}</span><input type={type} placeholder={placeholder} autoComplete="on" maxLength={200} {...register(name)} aria-invalid={Boolean(error)} className="[width:100%] [height:40px] [padding:0_11px] [outline:none] [border:1px_solid_#dfe6ed] [border-radius:7px] [color:#203751] [background:#fff] [font-size:10px] [transition:border-color_.17s,_box-shadow_.17s] placeholder:[color:#a5b0bc] focus:[border-color:#57ba89] focus:[box-shadow:0_0_0_3px_rgba(7,155,89,.09)] aria-invalid:[border-color:#dc7868] max-[620px]:[height:39px] max-[620px]:[padding:0_9px] max-[620px]:[font-size:9px]" />{error && <small className="field-error [color:#be4f44] [font-size:9px] [font-weight:500]">{error.message}</small>}</label>
+  return <label className="form-field min-w-0 flex flex-col gap-1.5 text-[#344a62] text-[10px] font-semibold max-mobile:text-[9px]"><span>{label} {required && <b className="text-[#e2725e]">*</b>}</span><input type={type} placeholder={placeholder} autoComplete="on" maxLength={200} {...register(name)} aria-invalid={Boolean(error)} className="w-full h-10 py-0 px-[11px] outline-none border border-[#dfe6ed] rounded-[7px] text-[#203751] bg-white text-[10px] transition-colors duration-200 placeholder:text-[#a5b0bc] focus:border-[#57ba89] focus:shadow-[0_0_0_3px_rgba(7,155,89,.09)] aria-invalid:border-[#dc7868] max-mobile:h-[39px] max-mobile:py-0 max-mobile:px-[9px] max-mobile:text-[9px]" />{error && <small className="field-error text-[#be4f44] text-[9px] font-medium">{error.message}</small>}</label>
 }

@@ -47,9 +47,9 @@ function App() {
                   <Route path="dashboard" element={<DashboardPage />} />
                   <Route path="respondents" element={<RespondentsPage />} />
                   <Route path="respondents/:id" element={<RespondentDetailPage />} />
-                  <Route path="wholesalers" element={<RespondentsPage category="wholesaler" />} />
+                  {/* <Route path="wholesalers" element={<RespondentsPage category="wholesaler" />} />
                   <Route path="buyers" element={<RespondentsPage category="buyer" />} />
-                  <Route path="logistics" element={<RespondentsPage category="logistics" />} />
+                  <Route path="logistics" element={<RespondentsPage category="logistics" />} /> */}
                   <Route path="analytics" element={<AdminDataPage mode="analytics" />} />
                   <Route path="export" element={<AdminDataPage mode="export" />} />
                   <Route path="settings" element={<AdminDataPage mode="settings" />} />

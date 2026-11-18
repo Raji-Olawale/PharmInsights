@@ -4,15 +4,15 @@ import { Activity } from 'lucide-react'
 export default function Brand({ light = false, compact = false, size = 'default' }) {
   const small = size !== 'default'
   const markClass = small
-    ? 'size-[31px] rounded-[9px] max-[620px]:size-[28px]'
-    : 'size-[35px] rounded-[11px] max-[620px]:size-[35px]'
+    ? 'size-[31px] rounded-[9px] max-mobile:size-[28px]'
+    : 'size-[35px] rounded-[11px] max-mobile:size-[35px]'
   const nameClass = size === 'questionnaire'
-    ? 'text-[16px] max-[620px]:text-[14px]'
+    ? 'text-[16px] max-mobile:text-[14px]'
     : size === 'sidebar'
       ? 'text-[16px]'
       : small
         ? 'text-[17px]'
-        : 'text-[19px] max-[620px]:text-[17px]'
+        : 'text-[19px] max-mobile:text-[17px]'
 
   return (
     <Link className={`brand inline-flex shrink-0 items-center gap-[10px] ${light ? 'brand-light text-white' : 'text-[#0b2e59]'}`} to="/" aria-label="PharmaInsight home">

@@ -18,12 +18,12 @@ export default function CategoryPage() {
   if (error) return <ConfigurationError message={error.message} />
 
   return (
-    <div className="onboarding-page [min-height:calc(100vh_-_78px)] [padding:27px_24px_24px] [display:flex] [flex-direction:column] [background:#f6f9fc] max-[620px]:[min-height:calc(100vh_-_66px)] max-[620px]:[padding:18px_19px]">
-      <div className="onboarding-back [width:min(100%,_850px)] [margin:0_auto]"><Link to="/" className="[display:inline-flex] [align-items:center] [gap:7px] [color:#718198] [font-size:11px] [font-weight:600] hover:[color:var(--navy)]"><ArrowLeft size={16} />Back to home</Link></div>
-      <div className="onboarding-shell [width:min(100%,_600px)] [margin:auto] [padding:23px_0_33px] max-[620px]:[padding:32px_0]">
-        <div className="step-indicator [display:flex] [align-items:center] [gap:10px] [color:#8391a2] [font-size:9px] [font-weight:700] [letter-spacing:.9px]"><span className="step-current [color:var(--green)] [font-size:12px]">01</span><span className="step-track [width:31px] [height:1px] [background:#cbd8e1]" /><span>SELECT YOUR ROLE</span></div>
-        <div className="onboarding-title [margin:21px_0_22px]"><h1 className="[margin:0_0_8px] [color:var(--navy)] [font-family:Manrope,_sans-serif] [font-size:30px] [letter-spacing:-1.1px] max-[620px]:[font-size:26px]">Which best describes you?</h1><p className="[margin:0] [color:#748398] [font-size:12px] [line-height:1.7]">Choose your role in the pharmaceutical supply chain to get started.</p></div>
-        <div className="selection-list [display:grid] [gap:10px]">
+    <div className="onboarding-page min-h-[calc(100vh_-_78px)] pt-[27px] px-6 pb-6 flex flex-col bg-[#f6f9fc] max-mobile:min-h-[calc(100vh_-_66px)] max-mobile:py-[18px] max-mobile:px-[19px]">
+      <div className="onboarding-back w-[min(100%,_850px)] my-0 mx-auto"><Link to="/" className="inline-flex items-center gap-[7px] text-[#718198] text-[11px] font-semibold hover:text-navy"><ArrowLeft size={16} />Back to home</Link></div>
+      <div className="onboarding-shell w-[min(100%,_600px)] m-auto pt-[23px] px-0 pb-[33px] max-mobile:py-8 max-mobile:px-0">
+        <div className="step-indicator flex items-center gap-2.5 text-[#8391a2] text-[9px] font-bold tracking-[.9px]"><span className="step-current text-green text-xs">01</span><span className="step-track w-[31px] h-px bg-[#cbd8e1]" /><span>SELECT YOUR ROLE</span></div>
+        <div className="onboarding-title mt-[21px] mx-0 mb-[22px]"><h1 className="mt-0 mx-0 mb-2 text-navy font-display text-3xl tracking-[-1.1px] max-mobile:text-[26px]">Which best describes you?</h1><p className="m-0 text-[#748398] text-xs leading-[1.7]">Choose your role in the pharmaceutical supply chain to get started.</p></div>
+        <div className="selection-list grid gap-2.5">
           {data.map((category) => {
             const metadata = categories[category.slug]
             if (!metadata) return null
@@ -34,19 +34,19 @@ export default function CategoryPage() {
                 type="button"
                 aria-pressed={selectedCategory === category.slug}
                 style={getAccentStyle(metadata.accent)}
-                className={`selection-card accent-${metadata.accent} flex min-h-[86px] w-full items-center gap-[14px] rounded-[10px] border bg-white px-[15px] py-[14px] text-left text-[var(--text)] transition duration-200 hover:border-[#bacbd8] max-[620px]:min-h-[82px] max-[620px]:gap-[11px] max-[620px]:p-[11px] ${selectedCategory === category.slug ? 'border-[var(--accent)] bg-[var(--accent-soft)] shadow-[0_0_0_2px_var(--accent-soft),0_8px_20px_rgba(18,43,70,.08)]' : 'border-[#e0e7ed]'} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]`}
+                className={`selection-card accent-${metadata.accent} flex min-h-[86px] w-full items-center gap-[14px] rounded-[10px] border bg-white px-[15px] py-[14px] text-left text-[var(--text)] transition duration-200 hover:border-[#bacbd8] max-mobile:min-h-[82px] max-mobile:gap-[11px] max-mobile:p-[11px] ${selectedCategory === category.slug ? 'border-[var(--accent)] bg-[var(--accent-soft)] shadow-[0_0_0_2px_var(--accent-soft),0_8px_20px_rgba(18,43,70,.08)]' : 'border-[#e0e7ed]'} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]`}
                 onClick={() => setSelectedCategory(category.slug)}
               >
-                <span className="selection-icon [width:43px] [height:43px] [flex:0_0_auto] [border-radius:11px] [display:grid] [place-items:center] [color:var(--accent)] [background:var(--accent-soft)] max-[620px]:[width:38px] max-[620px]:[height:38px]"><Icon size={22} /></span>
-                <span className="selection-copy [display:grid] [gap:5px]"><strong className="[color:#203954] [font-size:12px]">{category.name}</strong><small className="[color:#78889a] [font-size:10px] [line-height:1.5] max-[620px]:[font-size:9px]">{category.description}</small></span>
+                <span className="selection-icon w-[43px] h-[43px] flex-none rounded-[11px] grid place-items-center text-[var(--accent)] bg-[var(--accent-soft)] max-mobile:w-[38px] max-mobile:h-[38px]"><Icon size={22} /></span>
+                <span className="selection-copy grid gap-[5px]"><strong className="text-[#203954] text-xs">{category.name}</strong><small className="text-[#78889a] text-[10px] leading-normal max-mobile:text-[9px]">{category.description}</small></span>
                 <span className={`ml-auto grid size-6 shrink-0 place-items-center rounded-full transition ${selectedCategory === category.slug ? 'bg-[var(--accent)] text-white' : 'border border-[#dbe3eb] text-transparent'}`}>{selectedCategory === category.slug ? <Check size={15} /> : <ArrowRight size={15} className="text-[#8293a4]" />}</span>
               </button>
             )
           })}
-          {data.length === 0 && <div className="admin-error [padding:34px] [border:1px_solid_#f0d7d1] [border-radius:9px] [background:#fff]"><h2 className="[margin:0_0_8px] [color:#934c43] [font-size:14px]">No categories are configured</h2><p className="[margin:0_0_17px] [color:#8c7671] [font-size:10px]">The database returned no stakeholder categories.</p></div>}
+          {data.length === 0 && <div className="admin-error p-[34px] border border-[#f0d7d1] rounded-[9px] bg-white"><h2 className="mt-0 mx-0 mb-2 text-[#934c43] text-sm">No categories are configured</h2><p className="mt-0 mx-0 mb-[17px] text-[#8c7671] text-[10px]">The database returned no stakeholder categories.</p></div>}
         </div>
-        <div className="selection-actions [margin-top:20px] [display:flex] [justify-content:space-between] [align-items:center] max-[620px]:[align-items:flex-start] max-[620px]:[flex-direction:column] max-[620px]:[gap:15px]">
-          <span className="selection-security [display:flex] [align-items:center] [gap:7px] [color:#77889b] [font-size:10px]">No account required</span>
+        <div className="selection-actions mt-5 flex justify-between items-center max-mobile:items-start max-mobile:flex-col max-mobile:gap-[15px]">
+          <span className="selection-security flex items-center gap-[7px] text-[#77889b] text-[10px]">No account required</span>
           <button
             type="button"
             disabled={!selectedCategory}
@@ -57,7 +57,7 @@ export default function CategoryPage() {
           </button>
         </div>
       </div>
-      <div className="onboarding-bottom [max-width:850px] [width:100%] [margin:0_auto] [padding-top:13px] [border-top:1px_solid_#e4eaf0] [display:flex] [justify-content:space-between] [color:#94a1b0] [font-size:9px] max-[620px]:[gap:10px] max-[620px]:[font-size:7px]"><span className="first:[font-weight:700] first:[letter-spacing:.9px]">PHARMAINSIGHT</span><span className="first:[font-weight:700] first:[letter-spacing:.9px]">Your contribution is confidential and secure.</span></div>
+      <div className="onboarding-bottom max-w-[850px] w-full my-0 mx-auto pt-[13px] border-t border-[#e4eaf0] flex justify-between text-[#94a1b0] text-[9px] max-mobile:gap-2.5 max-mobile:text-[7px]"><span className="first:font-bold first:tracking-[.9px]">PHARMAINSIGHT</span><span className="first:font-bold first:tracking-[.9px]">Your contribution is confidential and secure.</span></div>
     </div>
   )
 }

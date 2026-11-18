@@ -5,30 +5,46 @@ import Brand from './Brand'
 
 export default function PublicLayout() {
   const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <div className="public-shell [min-height:100vh] [background:#fff]">
-      <header className="site-header [height:78px] [position:relative] [z-index:20] [background:rgba(255,255,255,.94)] [border-bottom:1px_solid_rgba(226,232,240,.72)] max-[620px]:[height:66px]">
-        <div className="nav-container [max-width:1240px] [height:100%] [margin:0_auto] [padding:0_34px] [display:flex] [align-items:center] [justify-content:space-between] max-[800px]:[padding:0_22px] max-[620px]:[padding:0_18px]">
+    <div className="min-h-screen bg-white">
+      <header className="relative z-2 h-[78px] border-b border-border/70 bg-white/95 max-mobile:h-[66px]">
+        <div className="mx-auto flex h-full max-w-[1240px] items-center justify-between px-[34px] max-tablet:px-[22px] max-mobile:px-[18px]">
           <Brand />
-          <button className="icon-button mobile-menu-button [border:0] [background:transparent] [color:var(--navy)] [display:inline-grid] [place-items:center] [display:none] max-[800px]:[width:37px] max-[800px]:[height:37px] max-[800px]:[display:grid]" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>
+          <button
+            type="button"
+            className="hidden size-[37px] place-items-center border-0 bg-transparent text-navy max-tablet:grid"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
             {menuOpen ? <X size={21} /> : <Menu size={21} />}
           </button>
-          <nav className={[(`main-nav${menuOpen ? ' nav-open' : ''}`), "[height:100%] [display:flex] [align-items:center] [gap:38px] [color:#53647a] [font-size:13px] [font-weight:600] max-[800px]:[height:auto] max-[800px]:[position:absolute] max-[800px]:[top:67px] max-[800px]:[left:14px] max-[800px]:[right:14px] max-[800px]:[padding:10px] max-[800px]:[border:1px_solid_#e4eaf0] max-[800px]:[border-radius:10px] max-[800px]:[display:none] max-[800px]:[align-items:stretch] max-[800px]:[gap:0] max-[800px]:[background:#fff] max-[800px]:[box-shadow:0_15px_30px_rgba(20,43,68,.12)] max-[800px]:[&.nav-open]:[display:flex] max-[800px]:[&.nav-open]:[flex-direction:column]"].filter(Boolean).join(' ')} aria-label="Main navigation">
-            <NavLink to="/" end onClick={() => setMenuOpen(false)} className="[transition:color_.18s_ease] hover:[color:var(--navy)] max-[800px]:[padding:12px] max-[800px]:[border-radius:6px]">Home</NavLink>
-            <a href="/#purpose" onClick={() => setMenuOpen(false)} className="[transition:color_.18s_ease] hover:[color:var(--navy)] max-[800px]:[padding:12px] max-[800px]:[border-radius:6px]">Our Purpose</a>
-            <Link className="admin-nav-link [transition:color_.18s_ease] hover:[color:var(--navy)] [padding:10px_15px] [border:1px_solid_#dfe6ee] [border-radius:8px] [color:var(--navy)] [transition:all_.2s_ease] hover:[border-color:#b6c8d8] hover:[background:#f7fafc] max-[800px]:[padding:12px] max-[800px]:[border-radius:6px] max-[800px]:[margin-top:4px]" to="/admin/login" onClick={() => setMenuOpen(false)}>Admin Login <span aria-hidden="true" className="[padding-left:5px] [font-size:15px]">↗</span></Link>
+          <nav
+            className={`flex h-full items-center gap-9 text-[13px] font-semibold text-[#53647a] max-tablet:absolute max-tablet:left-[14px] max-tablet:right-[14px] max-tablet:top-[67px] max-tablet:h-auto max-tablet:flex-col max-tablet:items-stretch max-tablet:gap-0 max-tablet:rounded-[10px] max-tablet:border max-tablet:border-[#e4eaf0] max-tablet:bg-white max-tablet:p-2.5 max-tablet:shadow-[0_15px_30px_rgba(20,43,68,.12)] ${menuOpen ? 'max-tablet:flex' : 'max-tablet:hidden'}`}
+            aria-label="Main navigation"
+          >
+            <NavLink to="/" end onClick={() => setMenuOpen(false)} className="rounded-md transition-colors hover:text-navy max-tablet:p-3">Home</NavLink>
+            <a href="/#purpose" onClick={() => setMenuOpen(false)} className="rounded-md transition-colors hover:text-navy max-tablet:p-3">Our Purpose</a>
+            <Link
+              className="rounded-lg border border-[#dfe6ee] px-[15px] py-2.5 text-navy transition-colors hover:border-[#b6c8d8] hover:bg-[#f7fafc] max-tablet:mt-1 max-tablet:rounded-md max-tablet:p-3"
+              to="/admin/login"
+              onClick={() => setMenuOpen(false)}
+            >
+              Admin Login <span aria-hidden="true" className="pl-1 text-[15px]">↗</span>
+            </Link>
           </nav>
         </div>
       </header>
       <main><Outlet /></main>
-      <footer className="site-footer [color:#b5c3d3] [background:#09284c]">
-        <div className="footer-inner [max-width:1240px] [margin:auto] [padding:42px_34px_20px] [display:grid] [grid-template-columns:1.5fr_1fr_auto] [align-items:center] [gap:28px] max-[800px]:[padding-right:25px] max-[800px]:[padding-left:25px] max-[800px]:[grid-template-columns:1fr_1fr] max-[620px]:[padding:30px_20px_17px] max-[620px]:[grid-template-columns:1fr] max-[620px]:[gap:19px]">
-          <div className="footer-brand">
+      <footer className="bg-[#09284c] text-[#b5c3d3]">
+        <div className="mx-auto grid max-w-[1240px] grid-cols-[1fr_auto] items-center gap-7 px-[34px] pt-[42px] pb-5 max-tablet:grid-cols-2 max-tablet:px-[25px] max-mobile:grid-cols-1 max-mobile:gap-[19px] max-mobile:px-5 max-mobile:pt-[30px] max-mobile:pb-[17px]">
+          <div>
             <Brand light />
-            <p className="[max-width:330px] [margin:13px_0_0] [color:#9fb0c2] [font-size:12px] [line-height:1.75]">Research for a stronger, more connected pharmaceutical supply chain in Uganda.</p>
+            <p className="mt-[13px] max-w-[330px] text-xs leading-7 text-[#9fb0c2]">Research for a stronger, more connected pharmaceutical supply chain in Uganda.</p>
           </div>
           
-          <div className="copyright [color:#8297ac] [font-size:11px] [text-align:right] max-[800px]:[grid-column:1/-1] max-[800px]:[text-align:left] max-[620px]:[grid-column:auto]">© {new Date().getFullYear()} PharmaInsight. All rights reserved.</div>
+          <div className="text-right text-[11px] text-[#8297ac] max-tablet:col-span-2 max-tablet:text-left max-mobile:col-span-1">© {new Date().getFullYear()} PharmaInsight. All rights reserved.</div>
         </div>
       </footer>
     </div>

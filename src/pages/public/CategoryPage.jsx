@@ -19,7 +19,7 @@ export default function CategoryPage() {
 
   return (
     <div className="onboarding-page min-h-[calc(100vh_-_78px)] pt-[27px] px-6 pb-6 flex flex-col bg-[#f6f9fc] max-mobile:min-h-[calc(100vh_-_66px)] max-mobile:py-[18px] max-mobile:px-[19px]">
-      <div className="onboarding-back w-[min(100%,_850px)] my-0 mx-auto"><Link to="/" className="inline-flex items-center gap-[7px] text-[#718198] text-[11px] font-semibold hover:text-navy"><ArrowLeft size={16} />Back to home</Link></div>
+      {/* <div className="onboarding-back w-[min(100%,_850px)] my-0 mx-auto"><Link to="/" className="inline-flex items-center gap-[7px] text-[#718198] text-[11px] font-semibold hover:text-navy"><ArrowLeft size={16} />Back to home</Link></div> */}
       <div className="onboarding-shell w-[min(100%,_600px)] m-auto pt-[23px] px-0 pb-[33px] max-mobile:py-8 max-mobile:px-0">
         <div className="step-indicator flex items-center gap-2.5 text-[#8391a2] text-[9px] font-bold tracking-[.9px]"><span className="step-current text-green text-xs">01</span><span className="step-track w-[31px] h-px bg-[#cbd8e1]" /><span>SELECT YOUR ROLE</span></div>
         <div className="onboarding-title mt-[21px] mx-0 mb-[22px]"><h1 className="mt-0 mx-0 mb-2 text-navy font-display text-3xl tracking-[-1.1px] max-mobile:text-[26px]">Which best describes you?</h1><p className="m-0 text-[#748398] text-xs leading-[1.7]">Choose your role in the pharmaceutical supply chain to get started.</p></div>

@@ -1,7 +1,8 @@
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
 
 const pageSize = 1000
-const adminAnswerColumns = 'response_id,submitted_at,category_slug,category,is_anonymous,respondent_name,business_name,location,contact,section,question_no,question,is_core,answer_text,follow_up_answer'
+// Re-add these four fields once the admin_answers view includes them.
+const adminAnswerColumns = 'response_id,submitted_at,category_slug,category,is_anonymous,respondent_name,business_name,contact,section,question_no,question,is_core,answer_text,follow_up_answer'
 
 function requireSupabase() {
   if (!isSupabaseConfigured || !supabase) {
@@ -27,7 +28,10 @@ function groupAnswerRows(rows) {
         submittedAt: row.submitted_at,
         respondentName: row.respondent_name,
         businessName: row.business_name,
-        location: row.location,
+        jobPosition: row.job_position,
+        yearsExperience: row.years_experience,
+        employeeCount: row.employee_count,
+        yearsOperating: row.years_operating,
         contact: row.contact,
         answers: [],
       }
@@ -95,7 +99,14 @@ export const researchService = {
 
   async submitResponse({ categorySlug, isAnonymous, respondent, answers }) {
     const client = requireSupabase()
-    const pRespondent = isAnonymous ? {} : respondent
+    const pRespondent = isAnonymous ? {} : {
+      name: respondent?.name ?? '',
+      business: respondent?.business ?? '',
+      jobPosition: respondent?.jobPosition ?? '',
+      yearsExperience: respondent?.yearsExperience ?? null,
+      employeeCount: respondent?.employeeCount ?? null,
+      yearsOperating: respondent?.yearsOperating ?? null,
+    }
     const pAnswers = answers.slice(0, 50).map((answer) => ({
       question_id: answer.questionId,
       answer_text: answer.answer.slice(0, 5000),
@@ -173,6 +184,10 @@ export const researchService = {
       isAnonymous: row.is_anonymous,
       respondentName: row.respondent_name,
       businessName: row.business_name,
+      jobPosition: row.job_position,
+      yearsExperience: row.years_experience,
+      employeeCount: row.employee_count,
+      yearsOperating: row.years_operating,
       answerText: row.answer_text,
       followUpAnswer: row.follow_up_answer,
     }))

@@ -7,6 +7,10 @@ export function exportRespondents(respondents, format = 'excel', filename = 'pha
     'Anonymous',
     'Name',
     'Business',
+    'Job position',
+    'Years of experience',
+    'Number of employees',
+    'Company operating duration (years)',
     'Location',
     'Contact',
     ...questionColumns.flatMap((column) => column.followUp
@@ -21,6 +25,10 @@ export function exportRespondents(respondents, format = 'excel', filename = 'pha
       Anonymous: response.isAnonymous ? 'Yes' : 'No',
       Name: response.isAnonymous ? 'Anonymous' : response.respondentName || '',
       Business: response.isAnonymous ? 'Anonymous' : response.businessName || '',
+      'Job position': response.isAnonymous ? 'Anonymous' : response.jobPosition ?? '',
+      'Years of experience': response.isAnonymous ? 'Anonymous' : response.yearsExperience ?? '',
+      'Number of employees': response.isAnonymous ? 'Anonymous' : response.employeeCount ?? '',
+      'Company operating duration (years)': response.isAnonymous ? 'Anonymous' : response.yearsOperating ?? '',
       Location: response.isAnonymous ? 'Anonymous' : response.location || '',
       Contact: response.isAnonymous ? 'Anonymous' : response.contact || '',
     }

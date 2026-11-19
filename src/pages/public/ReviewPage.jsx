@@ -49,10 +49,11 @@ export default function ReviewPage() {
         answer: response.answer.trim(),
         followUp: response.followUp.trim(),
       }))
+      const respondent = draft.isAnonymous ? {} : draft.respondent
       const id = await submitMutation.mutateAsync({
         categorySlug: slug,
         isAnonymous: draft.isAnonymous,
-        respondent: draft.isAnonymous ? {} : draft.respondent,
+        respondent,
         answers: submittedAnswers,
       })
       clearDraft(slug)

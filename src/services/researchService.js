@@ -1,8 +1,7 @@
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
 
 const pageSize = 1000
-// Re-add these four fields once the admin_answers view includes them.
-const adminAnswerColumns = 'response_id,submitted_at,category_slug,category,is_anonymous,respondent_name,business_name,contact,section,question_no,question,is_core,answer_text,follow_up_answer'
+const adminAnswerColumns = 'response_id,submitted_at,category_slug,category,is_anonymous,respondent_name,business_name,location,contact,job_position,years_experience,employee_count,years_operating,section,question_no,question,is_core,answer_text,follow_up_answer'
 
 function requireSupabase() {
   if (!isSupabaseConfigured || !supabase) {
@@ -33,6 +32,7 @@ function groupAnswerRows(rows) {
         employeeCount: row.employee_count,
         yearsOperating: row.years_operating,
         contact: row.contact,
+        location: row.location,
         answers: [],
       }
       responses.set(row.response_id, response)
@@ -112,6 +112,8 @@ export const researchService = {
       answer_text: answer.answer.slice(0, 5000),
       follow_up_answer: answer.followUp.slice(0, 5000),
     }))
+
+
     const { data, error } = await client.rpc('submit_response', {
       p_category_slug: categorySlug,
       p_is_anonymous: isAnonymous,
